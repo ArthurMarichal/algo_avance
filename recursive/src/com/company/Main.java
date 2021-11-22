@@ -3,19 +3,26 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Factorielle de 8 = "+factorielle(8));
-        System.out.println("Factorielle de 7 = "+factorielle(7));
-        System.out.println("Factorielle de 6 = "+factorielle(6));
-        System.out.println("Factorielle de 5 = "+factorielle(5));
-        System.out.println("Factorielle de 4 = "+factorielle(4));
-        System.out.println("Factorielle de 3 = "+factorielle(3));
-        System.out.println("Factorielle de 2 = "+factorielle(2));
+        System.out.println("Factorielle de 8 = " + factoriel(8));
+        System.out.println("Factorielle de 7 = " + factoriel(7));
+        System.out.println("----------------------------------------");
+        System.out.println("Suite de Fibonacci de 8 : " + fibonacci(8));
+        System.out.println("Suite de Fibonacci de 9 : " + fibonacci(9));
     }
-    public static int factorielle(int nombre){
+
+    public static int factoriel(int nombre) {
         if (nombre == 1) {
             return 1;
         } else {
-            return (nombre*factorielle(nombre-1));
+            return (nombre * factoriel(nombre - 1));
+        }
+    }
+
+    public static int fibonacci(int nombre) {
+        if (nombre > 1) {
+            return (fibonacci(nombre - 1)+fibonacci(nombre - 2));
+        } else {
+            return nombre;
         }
     }
 }
