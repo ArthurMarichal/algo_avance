@@ -10,6 +10,8 @@ public class Main {
         System.out.println("Suite de Fibonacci de 9 : " + fibonacci(9));
         System.out.println("----------------------------------------");
         System.out.println("Conjecture de Syracuse de 19 : " + syracuse(15, 10));
+        System.out.println("----------------------------------------");
+        System.out.println("PGCD de 10 et 20 : "+ pgcd(48*9,48*7));
     }
 
     public static int factoriel(int nombre) {
@@ -37,5 +39,12 @@ public class Main {
         return syr *3 +1;
     }
 
+    public static int pgcd(int a, int b){
+        if (b == 0)
+            return a;
 
+        int R = a%b;
+            return pgcd(b,R);
+
+    }
 }
