@@ -1,3 +1,18 @@
 * {
     box-sizing: border-box;
 }
+.not-visited{
+    background-color: rgba(200, 1, 255, 0.15);
+}
+.visted{
+    background-color: rgba(96, 131, 96, 0.55);
+}
+.path{
+    background-color: #ffbb01;
+}
+.entrance{
+    background-color: rgba(2,255,2,0.55);
+}
+.exit{
+    background-color: rgba(252,14,14,0.8);
+}
