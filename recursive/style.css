@@ -4,7 +4,7 @@
 .not-visited{
     background-color: rgba(200, 1, 255, 0.15);
 }
-.visted{
+.visited{
     background-color: rgba(96, 131, 96, 0.55);
 }
 .path{
