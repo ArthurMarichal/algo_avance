@@ -27,17 +27,11 @@ function distanceFromGrenoble(city) {
 // i is the index of the first city
 // j is the index of the second city
 function swap(i, j) {
-    // console.log("Avant swap");
-    // console.log("Valeur de j "+distanceFromGrenoble(csvData[j]));
-    // console.log("Valeur de i "+distanceFromGrenoble(csvData[i]));
     let temp = csvData[j];
     csvData[j] = csvData[i];
     csvData[i] = temp;
     displayBuffer.push(['swap', i, j]); // Do not delete this line (for display)
-    // console.log("swap - implement me !");
-    // console.log("Valeur de temp "+ temp);
-    // console.log("Valeur de j "+j);
-    // console.log("Valeur de i "+i);
+
 }
 
 // Returns true if city with index i in csvData is closer to Grenoble than city with index j
@@ -53,10 +47,6 @@ function isLess(i, j) {
 function insertsort() {
     let i, j;
     for (i = 0; i < csvData.length - 1; i++) {
-        console.log("Boucle " + i);
-        if (isLess(i, i + 1)) {
-            continue;
-        }
         for (j = i; j >= 0 && isLess(j + 1, j); j--) {
             swap(j + 1, j);
         }
@@ -83,9 +73,10 @@ function bubblesort() {
                 swap(j, k)
             }
             k++;
+
+
         }
     }
-    console.log("bubblesort - implement me !");
 }
 
 function shellsort() {
