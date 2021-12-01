@@ -77,11 +77,12 @@ function bubblesort()
   for (let i = csvData.length; i > 0; i--){
     let j = 0;
     let k = j + 1;
-    while (j != i ){
-      if (isLess(j,k)){
+    while (j < i - 1){
+      if (!isLess(j,k)){
         swap(j,k)
       }
-      j++
+      j++;
+      k++;
     }
 }
   console.log("bubblesort - implement me !");
