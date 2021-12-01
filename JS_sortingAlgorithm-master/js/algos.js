@@ -6,16 +6,16 @@ Number.prototype.toRadians = function() {
 // Calculates the distance between Grenoble and the given city
 function distanceFromGrenoble(city)
 {
-  console.log("distanceFromGrenoble - implement me !");
-  var GrenobleLat = 45.166667;
-  var GrenobleLong = 5.716667;
-  var cityLat = city.latitude;
-  var  cityLong = city.longitude;
-  const R = 6371e3 / 1000;
-  const φ1 = GrenobleLat * Math.PI/180; // φ, λ in radians
-  const φ2 = cityLat * Math.PI/180;
-  const Δφ = (cityLat-GrenobleLat) * Math.PI/180;
-  const Δλ = (cityLong-GrenobleLong) * Math.PI/180;
+  const GrenobleLat = 45.166667;
+  const GrenobleLong = 5.716667;
+  const cityLat = parseFloat(city.latitude);
+  const  cityLong = parseFloat(city.longitude);
+
+  const R = 6371;
+  const φ1 = GrenobleLat.toRadians(); // φ, λ in radians
+  const φ2 = cityLat.toRadians();
+  const Δφ = (cityLat-GrenobleLat).toRadians();
+  const Δλ = (cityLong-GrenobleLong).toRadians();
 
   const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
       Math.cos(φ1) * Math.cos(φ2) *
@@ -29,11 +29,17 @@ function distanceFromGrenoble(city)
 // j is the index of the second city
 function swap(i,j)
 {
-  let temp = distanceFromGrenoble(j);
-  j = distanceFromGrenoble(i);
-  i = temp;
+  // console.log("Avant swap");
+  // console.log("Valeur de j "+distanceFromGrenoble(csvData[j]));
+  // console.log("Valeur de i "+distanceFromGrenoble(csvData[i]));
+  let temp = csvData[j];
+  csvData[j] = csvData[i];
+  csvData[i] = temp;
   displayBuffer.push(['swap', i, j]); // Do not delete this line (for display)
-  console.log("swap - implement me !");
+  // console.log("swap - implement me !");
+  // console.log("Valeur de temp "+ temp);
+  // console.log("Valeur de j "+j);
+  // console.log("Valeur de i "+i);
 }
 
 // Returns true if city with index i in csvData is closer to Grenoble than city with index j
@@ -41,25 +47,24 @@ function swap(i,j)
 // j is the index of the second city
 function isLess(i, j)
 {
-  if (distanceFromGrenoble(i)<distanceFromGrenoble(j)){
-    return true;
-  }
   displayBuffer.push(['compare', i, j]); // Do not delete this line (for display)
-  console.log("isLess - implement me !");
+
+  return csvData[i].dist < csvData[j].dist;
 }
 
 
 function insertsort()
 {
-  console.log("Taille de csvData : "+csvData.length)
-  for (let i = 0; i < csvData.length; i++){
-    let j = i;
-    let k = i+1;
-    if (isLess(j,k)){
-      swap(j,k)
+  let i, j;
+  for(i = 0; i < csvData.length - 1; i++) {
+    console.log("Boucle "+i);
+    if (isLess(i, i + 1))  {
+      continue;
+    }
+    for (j = i ; j >= 0 && isLess(j + 1, j) ; j--) {
+      swap( j + 1, j);
     }
   }
-  console.log("insertsort - implement me !");
 }
 
 function selectionsort()
@@ -69,6 +74,16 @@ function selectionsort()
 
 function bubblesort()
 {
+  for (let i = csvData.length; i > 0; i--){
+    let j = 0;
+    let k = j + 1;
+    while (j != i ){
+      if (isLess(j,k)){
+        swap(j,k)
+      }
+      j++
+    }
+}
   console.log("bubblesort - implement me !");
 }
 
