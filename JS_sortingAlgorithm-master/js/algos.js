@@ -43,6 +43,69 @@ function isLess(i, j) {
     return csvData[i].dist < csvData[j].dist;
 }
 
+function partition(items,left, right) {
+    var pivot   = items[Math.floor((right + left) / 2)], //middle element
+        i       = left, //left pointer
+        j       = right; //right pointer
+    while (i <= j) {
+        while (items[i] < pivot) {
+            i++;
+        }
+        while (items[j] > pivot) {
+            j--;
+        }
+        if (i <= j) {
+            swap(i, j); //swap two elements
+            i++;
+            j--;
+        }
+    }
+    return i;
+}
+
+// function quicksort() {
+//     let left = 0;
+//     let right = csvData.length
+//     let index;
+//     if (csvData.length > 1) {
+//         index = partition(left, right); //index returned from partition
+//         if (left < index - 1) { //more elements on the left side of the pivot
+//             quickSort(items, left, index - 1);
+//         }
+//         if (index < right) { //more elements on the right side of the pivot
+//             quickSort(items, index, right);
+//         }
+//     }
+// }
+
+function quicksort(items, left, right) {
+    var index;
+    if (items.length > 1) {
+        index = partition(items,left, right); //index returned from partition
+        if (left < index - 1) { //more elements on the left side of the pivot
+            quicksort(items, left, index - 1);
+        }
+        if (index < right) { //more elements on the right side of the pivot
+            quicksort(items, index, right);
+        }
+    }
+    return items;
+}
+
+function shellsort() {
+    let b = csvData
+    espacements = [701, 301, 132, 57, 23, 10, 4, 1]
+    for (let e in espacements) {
+        for (let a = 0; a < e; a++){
+            for (let i = a; i < csvData.length; i += e){
+                for (let j = i; j >= e && isLess(b[j - e],b[i]); j-= e){
+                    swap(b[j],b[j-e])
+                }
+            }
+        }
+    }
+}
+
 
 function insertsort() {
     let i, j;
@@ -79,20 +142,12 @@ function bubblesort() {
     }
 }
 
-function shellsort() {
-    console.log("shellsort - implement me !");
-}
-
 function mergesort() {
     console.log("mergesort - implement me !");
 }
 
 function heapsort() {
     console.log("heapsort - implement me !");
-}
-
-function quicksort() {
-    console.log("quicksort - implement me !");
 }
 
 function quick3sort() {
@@ -121,7 +176,7 @@ function sort(algo) {
             heapsort();
             break;
         case 'quick':
-            quicksort();
+            quicksort(csvData,0,csvData.length -1);
             break;
         case 'quick3':
             quick3sort();

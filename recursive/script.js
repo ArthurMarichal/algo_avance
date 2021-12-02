@@ -1,4 +1,4 @@
-var size = 25;
+var size = 15;
 const currentMap = data[size]["ex-2"];
 var entrance;
 var exit;
