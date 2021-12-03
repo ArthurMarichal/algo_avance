@@ -39,7 +39,6 @@ function swap(i, j) {
 // j is the index of the second city
 function isLess(i, j) {
     displayBuffer.push(['compare', i, j]); // Do not delete this line (for display)
-
     return csvData[i].dist < csvData[j].dist;
 }
 
@@ -57,24 +56,9 @@ function partition(items, left, right) {
     return i;
 }
 
-// function quicksort() {
-//     let left = 0;
-//     let right = csvData.length
-//     let index;
-//     if (csvData.length > 1) {
-//         index = partition(left, right); //index returned from partition
-//         if (left < index - 1) { //more elements on the left side of the pivot
-//             quickSort(items, left, index - 1);
-//         }
-//         if (index < right) { //more elements on the right side of the pivot
-//             quickSort(items, index, right);
-//         }
-//     }
-// }
 
 function quicksort(items, left, right) {
     let nbElement = right - left;
-    //swap(0, rand(1,n));
     if (nbElement <= 1) {
         return;
     }else{
@@ -142,9 +126,29 @@ function bubblesort() {
         }
     }
 }
+const a = [7,16,32,20,54,69,2,8,99,26]
+function fusion(A, B){
+    if (A.length === 0){
+        return B;
+    }
+    if (B.length === 0){
+        return A;
+    }
+    if (A[0] <= B[0]) {
+        return [A[0]].concat(fusion(A.slice(1), B));
+    } else {
+        return [B[0]].concat(fusion(A,B.slice(1)));
+    }
+}
 
-function mergesort() {
-    console.log("mergesort - implement me !");
+function mergesort(items) {
+ //   let half = items.length / 2;
+    if ( items.length <= 1){
+        return items;
+    }else {
+        return fusion(mergesort(items.slice(0,items.length/2)), mergesort(items.slice(items.length/2, items.length)));
+    }
+
 }
 
 function heapsort() {
@@ -171,7 +175,8 @@ function sort(algo) {
             shellsort();
             break;
         case 'merge':
-            mergesort();
+            let result = mergesort(a);
+            console.log(result)
             break;
         case 'heap':
             heapsort();
