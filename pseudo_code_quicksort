@@ -1,0 +1,19 @@
+sort(a,nleft,nright){
+_# choose pivot_
+swap(0, rand(1,n);
+
+
+_# 2-way partition_
+k = 0
+for (i de 1 à n) {
+  if (a[i] < a[1]) {
+    k = k + 1
+    swap(k,i)
+  }
+}
+swap(1,k)
+
+_# recursive sorts_
+sort( a, 1, k-1)
+sort( a,k+1,n)
+}

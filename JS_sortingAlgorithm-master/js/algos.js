@@ -43,17 +43,11 @@ function isLess(i, j) {
     return csvData[i].dist < csvData[j].dist;
 }
 
-function partition(items,left, right) {
-    var pivot   = items[Math.floor((right + left) / 2)], //middle element
-        i       = left, //left pointer
-        j       = right; //right pointer
+function partition(items, left, right) {
+    let pivot = items[Math.floor((right + left) / 2)], //middle element
+        i = left, //left pointer
+        j = right; //right pointer
     while (i <= j) {
-        while (items[i] < pivot) {
-            i++;
-        }
-        while (items[j] > pivot) {
-            j--;
-        }
         if (i <= j) {
             swap(i, j); //swap two elements
             i++;
@@ -79,27 +73,34 @@ function partition(items,left, right) {
 // }
 
 function quicksort(items, left, right) {
-    var index;
-    if (items.length > 1) {
-        index = partition(items,left, right); //index returned from partition
-        if (left < index - 1) { //more elements on the left side of the pivot
-            quicksort(items, left, index - 1);
+    let nbElement = right - left;
+    //swap(0, rand(1,n));
+    if (nbElement <= 1) {
+        return;
+    }else{
+        let k = left;
+        for (let i = left + 1; i < right; i++) {
+            if (isLess(i, left)) {
+                k++;
+                swap(k, i);
+            }
         }
-        if (index < right) { //more elements on the right side of the pivot
-            quicksort(items, index, right);
-        }
+        swap(left, k);
+        console.log(k,left,right)
+
+        quicksort(items, left, k);
+        quicksort(items, k + 1, right);
     }
-    return items;
 }
 
 function shellsort() {
     let b = csvData
     espacements = [701, 301, 132, 57, 23, 10, 4, 1]
     for (let e in espacements) {
-        for (let a = 0; a < e; a++){
-            for (let i = a; i < csvData.length; i += e){
-                for (let j = i; j >= e && isLess(b[j - e],b[i]); j-= e){
-                    swap(b[j],b[j-e])
+        for (let a = 0; a < e; a++) {
+            for (let i = a; i < csvData.length; i += e) {
+                for (let j = i; j >= e && isLess(b[j - e], b[i]); j -= e) {
+                    swap(b[j], b[j - e])
                 }
             }
         }
@@ -118,12 +119,12 @@ function insertsort() {
 
 function selectionsort() {
     for (let i = 0; i < csvData.length - 1; i++) {
-      let k = i + 1;
-      for (k; k < csvData.length; k++){
-        if (!isLess(i,k)){
-          swap(i,k)
+        let k = i + 1;
+        for (k; k < csvData.length; k++) {
+            if (!isLess(i, k)) {
+                swap(i, k)
+            }
         }
-      }
     }
 }
 
@@ -176,7 +177,7 @@ function sort(algo) {
             heapsort();
             break;
         case 'quick':
-            quicksort(csvData,0,csvData.length -1);
+            quicksort(csvData, 0, csvData.length);
             break;
         case 'quick3':
             quick3sort();
